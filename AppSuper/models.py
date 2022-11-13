@@ -9,21 +9,22 @@ class User(models.Model):
 
     def __str__(self) -> str:
         return self.nombre+" "+ self.apellido+" - Contacto: "+str(self.contacto)
+#---------------------------------
+class Producto(models.Model):
+    nombre = models.CharField(max_length=30)
+    categoria = models.CharField(max_length=30)
+    precio = models.IntegerField()
 
-class Articulo(models.Model):
-    nombre = models.CharField(max_length=40)
-    precio = models.CharField(max_length=15)
-    
-    def __str__(self) -> str:
-        return self.nombre+" - Precio: "+str(self.precio)
-
+    def __str__(self):
+        return f'{self.nombre} -> ${self.precio}'
+#---------------------------------
 class Mensaje(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     texto = models.CharField(max_length=150)
     
     def __str__(self) -> str:
         return self.usuario.nombre+ " " +str(self.usuario.apellido)
-    
+ #--------------------------------  
 
 
 
