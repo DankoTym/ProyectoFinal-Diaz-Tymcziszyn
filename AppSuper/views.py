@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from django.shortcuts import redirect
 
 from AppSuper.Carrito import Carrito
 from AppSuper.models import Producto
@@ -15,28 +16,24 @@ def agregar_producto(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
     carrito.agregar(producto)
-    productos = Producto.objects.all()
-    return render(request, "AppSuper/tienda.html", {'productos':productos, 'carrito':carrito})
-
+    return redirect("Tienda")
+ 
 
 def eliminar_producto(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
     carrito.eliminar(producto)
-    productos = Producto.objects.all()
-    return render(request, "AppSuper/tienda.html", {'productos':productos, 'carrito':carrito})
+    return redirect("Tienda")
 
 def restar_producto(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
     carrito.restar(producto)
-    productos = Producto.objects.all()
-    return render(request, "AppSuper/tienda.html", {'productos':productos, 'carrito':carrito})
+    return redirect("Tienda")
 
 def limpiar_carrito(request):
     carrito = Carrito(request)
     carrito.limpiar()
-    productos = Producto.objects.all()
-    return render(request, "AppSuper/tienda.html", {'productos':productos, 'carrito':carrito})
+    return redirect("Tienda")
 
 #-----------------------------
