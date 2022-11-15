@@ -1,4 +1,5 @@
 class Carrito:
+    #Habría que ir comentando los bloques, así facilita la vida :)    
     def __init__(self, request):
         self.request = request
         self.session = request.session
