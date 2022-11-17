@@ -27,10 +27,15 @@
                 <div class="row" style="padding: 10px 0;">
                     <div class="col-12">
                         <div class="row">
-                            {% for producto in productos %}
+                            {% for producto in productos %}     <!--LISTA LOS PRODUCTOS-->
                             <div class="col-6">
-                                <div class="card" style="height: 10rem; width: 23rem; margin: 5px 0px;">
+                                <div class="card" style="height: 20rem; width: 15rem; margin: 5px 0px;">
                                     <div class="card-body">
+
+                                        {% if producto.imagen%}   <!-- ESTO ES PARA QUE NO SE ROMPA SI NO HAY IMAGEN CARGADA -->
+                                        <img class="card.img" src="{{ producto.imagen.url }}" width="150" height="150">
+                                        {% endif %}
+                                        
                                         <h5 class="card-title">{{producto.nombre}}</h5>
                                         <p class="card-text">{{producto.categoria}}</p>
                                         <p class="card-text">${{producto.precio}}</p>
@@ -52,6 +57,8 @@
     <!-- Bootstrap -->
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
+<br>
+  <!-- CARRITO DE COMPRA -->
 <body>
     <div class="container">
         <div class="alert alert-primary" role="alert">
@@ -99,6 +106,7 @@
         </div>
     </div> 
 </body>
+  <!-- FIN CARRITO -->
 </html>
 
 {% endblock%}

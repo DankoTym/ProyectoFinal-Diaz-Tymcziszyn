@@ -14,6 +14,7 @@ class Producto(models.Model):
     nombre = models.CharField(max_length=30)
     categoria = models.CharField(max_length=30)
     precio = models.IntegerField()
+    imagen = models.ImageField(upload_to="productos", null=True) #sube la imagen a una carpeta "productos" en "media"
 
     def __str__(self):
         return f'{self.nombre} -> ${self.precio}'
