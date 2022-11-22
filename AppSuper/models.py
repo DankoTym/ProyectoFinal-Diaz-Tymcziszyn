@@ -6,9 +6,11 @@ class User(models.Model):
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)
     contacto = models.CharField(max_length=30)
+    #imagen = models.ImageField(upload_to="usuario", null=True)
 
     def __str__(self) -> str:
         return self.nombre+" "+ self.apellido+" - Contacto: "+str(self.contacto)
+
 #---------------------------------
 class Producto(models.Model):
     nombre = models.CharField(max_length=30)
@@ -27,8 +29,4 @@ class Mensaje(models.Model):
         return self.usuario.nombre+ " " +str(self.usuario.apellido)
  #--------------------------------  
 
-
-
-#class Avatar(models.Model):
-#   articulo = models.ForeignKey (Articulo, on_delete=models.CASCADE)
 

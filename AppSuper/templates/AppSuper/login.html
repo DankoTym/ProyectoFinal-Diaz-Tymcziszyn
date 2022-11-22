@@ -1,0 +1,17 @@
+{% extends "AppSuper/padre.html" %}    
+{% load static %}
+{% block contenidoDeTitulo %}
+
+<h2>Login</h2>
+
+{% endblock%}
+
+{% block contenidoCambiante %}
+
+<form method="POST">{% csrf_token %}
+    <h1>Ingrese usuario y contraseña</h1>
+    {{ form.as_p }}                               <!-- Permite mostrar los campos del elemento -->
+    <button type="submit">Inicio Sesion</button>
+</form>
+
+{% endblock %}
