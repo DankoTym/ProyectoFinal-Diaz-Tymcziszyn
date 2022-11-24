@@ -1,0 +1,19 @@
+{% extends "AppSuper/padre.html" %}
+{% load static %}
+
+{% block contenidoDeTitulo %}
+
+<h2>Formulario para Mensajes</h2>
+{% endblock%}
+
+{% block contenidoCambiante %}
+
+<form action="{% url 'mensajeFormulario' %}" method="POST">{% csrf_token %}  <!-- Con esto se genera el token necesario para enviar los datos--> 
+    <h1>Ingrese su mensaje:</h1>
+    <table width="150" height="150">
+        {{miFormulario.as_table}}
+    </table>
+    <input type="submit" value="Enviar Mensaje">        <!--- Acá se genera el boton para enviar los datos -->
+</form>
+
+{% endblock %}

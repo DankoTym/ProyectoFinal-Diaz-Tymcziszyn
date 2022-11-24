@@ -1,14 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from django.shortcuts import redirect   #redirige los datos a la pagina establecida (menos lineas de codigo)
+from AppSuper.models import Producto, Mensaje   #importo mis models
+
 #----IMPORTACIONES CARRITO Y TIENDA:---
 from AppSuper.Carrito import Carrito
-from AppSuper.models import Producto
-from django.shortcuts import redirect   #redirige los datos a la pagina establecida (menos lineas de codigo)
 #----IMPORTACIONES LOGIN:----
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from AppSuper.forms import UserRegistrationForm, UserEditForm
+#----IMPORTACIONES MENSAJES:--
+from AppSuper.forms import MensajeFormulario
 
 
 #----Carrito de Compras:------
@@ -22,7 +25,6 @@ def agregar_producto(request, producto_id):
     carrito.agregar(producto)
     return redirect("Tienda")
  
-
 def eliminar_producto(request, producto_id):
     carrito = Carrito(request)
     producto = Producto.objects.get(id=producto_id)
@@ -63,6 +65,7 @@ def login_request(request):
     else:
         form = AuthenticationForm()
         return render(request, 'AppSuper/login.html', {'form':form})
+
 #---Crear usuario-----
 def register_request(request):
     if request.method == 'POST':
@@ -76,3 +79,38 @@ def register_request(request):
     else:
         form = UserRegistrationForm()
         return render(request, 'AppSuper/tienda.html', {'form':form})
+
+#----EDITAR USUARIO----
+def editarPerfil(request):
+    usuario = request.user #aca django manda directamente el modelo, no lo generamos nos
+
+    if request.method == 'POST':
+        formulario = UserEditForm(request.POST)
+
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
+            usuario.save()
+
+            return render(request, 'AppSuper/inicio.html',{'mensaje':f"Datos de {username} actualizados"})
+    else:
+        formulario = UserEditForm(initial={'email':usuario.email})
+    return render(request, 'AppSuper/editarPerfil.html', {'formulario':formulario, 'usuario':usuario.username})
+ 
+#----CONTACTO----------
+def mensajeFormulario(request):
+    if request.method == 'POST':
+        miFormulario = MensajeFormulario(request.POST)
+        if miFormulario.is_valid():
+            informacion=miFormulario.cleaned_data
+        nombre = informacion['nombre']
+        texto = informacion['texto']
+        mensaje = Mensaje(nombre=nombre, texto=texto)
+        mensaje.save()
+        return redirect("Tienda")
+    else:
+        miFormulario = MensajeFormulario()
+    
+    return render(request, 'AppSuper/mensajeFormulario.html', {'miFormulario':miFormulario})
