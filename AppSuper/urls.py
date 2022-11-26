@@ -20,6 +20,6 @@ urlpatterns = [
     #Mensaje:
     path('mensajeFormulario/', views.mensajeFormulario, name="mensajeFormulario"),
     #carga archivo:
-    path('suba', views.simple_upload, name='suba')
+    path('suba/', views.simple_upload, name='suba')
 ]
 

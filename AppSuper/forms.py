@@ -25,9 +25,8 @@ class Meta:
     fields = {'email', 'password1', 'password2'}
     help_text = {k:"" for k in fields}
 
-
-
 #---Mensajes:----
 class MensajeFormulario(forms.Form):            
     nombre = forms.CharField(max_length=50)
     texto = forms.CharField(max_length=150)
+

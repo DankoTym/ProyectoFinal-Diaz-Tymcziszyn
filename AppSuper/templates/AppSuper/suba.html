@@ -1,99 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        {% load static %}
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>ElViejoAlmacen</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'AppSuper/css/styles.css' %}" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="{% url 'Tienda'%}">Inicio</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        
-                        {% if user.is_authenticated %}  <!-- Esto es para que solo los logueados ingresen acá-->
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'mensajeFormulario'%}"">Mensaje</a></li>
-                        {% else %}                      <!-- En caso de no estar logueado, ingresa acá -->
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login'%}"">Iniciar</a></li>
-                        {% endif %}
+{% extends "AppSuper/padre.html" %}
+{% load static %}
+<!-- -------------------- -->
+{% block contenidoDeTitulo %}
 
-                        <li class="nav-item"><a class="nav-link" href="{% url 'Tienda'%}">Articulos</a></li>
+<h1>Carga de Articulos</h1>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">Todos los Productos</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Limpieza</a></li>
-                                <li><a class="dropdown-item" href="#!">Panaderia</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <li 
+{% endblock%}               <!-- Resumí un poco esto -->
 
-                        {% if user.is_authenticated %}  <!-- Esto es para que solo los logueados ingresen acá-->
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'editarPerfil'%}">{{user.username}}</a></li>
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'logout'%}">Salir</a></li>
-                        {% else %}                      <!-- En caso de no estar logueado, ingresa acá -->
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login'%}"">Iniciar</a></li>
-                        {% endif %}
 
-                       
-                    </li>
-                </div>
-            </div>
-        </nav>
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">El Viejo Almacen
-                        {% block contenidoDeTitulo %}
-                        {% endblock%}
-                    </h1>
-                    
-                </div>
-            </div>
-        </header>
-        <!-- Section-->
+{% block contenidoCambiante %}
 
-        
-        {% block contenidoCambiante %}
+<div>
+    <form method="post" class="form-signin" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="myfile">
+        <button type="submit">Subir archivo </button>
+    </form>
+</div>
 
-            <div>
-                <form method="post" class="form-signin" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="file" name="myfile">
-                    <button type="submit">Subir archivo </button>
-                </form>
-            </div>
+{% if uploaded_file_url %}
+<p>Archivo subido en: <a href="{{ uploaded_file_url }}"> {{uploaded_file_url}}  </a></p>
+{% endif %}
 
-            {% if uploaded_file_url %}
-            <p>Archivo subido en: <a href="{{ uploaded_file_url }}"> {{uploaded_file_url}}  </a></p>
-            {% endif %}
-
-        {% endblock%}
-        
-       
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
-</html>
+{% endblock%}
