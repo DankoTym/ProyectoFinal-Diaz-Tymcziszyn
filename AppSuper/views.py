@@ -12,6 +12,9 @@ from django.contrib.auth import login, authenticate, logout
 from AppSuper.forms import UserRegistrationForm, UserEditForm
 #----IMPORTACIONES MENSAJES:--
 from AppSuper.forms import MensajeFormulario
+#----CARGA DE ARCHIVOS----
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 
 
 #----Carrito de Compras:------
@@ -42,6 +45,18 @@ def limpiar_carrito(request):
     carrito.limpiar()
     return redirect("Tienda")
 
+#--------CARGA ARCHIVOS----------
+
+def simple_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'AppSuper/suba.html', {
+            'uploaded_file_url': uploaded_file_url})
+    return render(request, 'AppSuper/suba.html')
+    
 #----------LOGIN---------------
 #------INGRESAR-----
 def login_request(request):

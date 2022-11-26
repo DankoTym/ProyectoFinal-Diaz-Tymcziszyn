@@ -9,5 +9,6 @@ urlpatterns = [
     path('AppSuper/', include('AppSuper.urls')) #conecto mi app con el url principal
 ]
 
+#esto es para la carga de archivos
 if settings. DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  #esto es para proyecto en desarrollo, hace que la imagen se busque en el directorio fisico de nuestra PC
