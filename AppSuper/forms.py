@@ -30,3 +30,11 @@ class MensajeFormulario(forms.Form):
     nombre = forms.CharField(max_length=50)
     texto = forms.CharField(max_length=150)
 
+#----Carga imagenes2----
+
+class StudentForm(forms.Form):
+    firstname = forms.CharField(label="Nombre", max_length=50)
+    lastname = forms.CharField(label="Apellido", max_length=50)
+    email = forms.EmailField(label="Correo")
+    time = forms.DateField(label="Fecha subida")
+    file = forms.FileField(label="Archivo")

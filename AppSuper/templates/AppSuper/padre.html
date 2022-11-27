@@ -42,7 +42,7 @@
                         </li>
                     </ul>
                     <li 
-
+                        <!-- Esta es la parte derecha del NAV -->
                         {% if user.is_authenticated %}  <!-- Esto es para que solo los logueados ingresen acá-->
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'editarPerfil'%}">{{user.username}}</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'logout'%}">Salir</a></li>
