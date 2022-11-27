@@ -15,6 +15,9 @@ from AppSuper.forms import MensajeFormulario
 #----CARGA DE ARCHIVOS----
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
+#----CARGA ARCHIVOS2----
+from AppSuper.forms import StudentForm
+from AppSuper.functions import handle_uploaded_file
 
 
 #----Carrito de Compras:------
@@ -45,7 +48,7 @@ def limpiar_carrito(request):
     carrito.limpiar()
     return redirect("Tienda")
 
-#--------CARGA ARCHIVOS----------
+#--------CARGA ARCHIVOS (en desuso)----------
 
 def simple_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
@@ -56,7 +59,19 @@ def simple_upload(request):
         return render(request, 'AppSuper/suba.html', {
             'uploaded_file_url': uploaded_file_url})
     return render(request, 'AppSuper/suba.html')
-    
+
+#-------CARGA ARCHIVOS 2---------
+def index(request):
+    if request.method=="POST":
+        student = StudentForm(request.POST, request.FILES)
+        if student.is_valid():
+            handle_uploaded_file(request.FILES['file'])
+            return render(request,"AppSuper/suba.html",{"variable_desde_view":True})
+            #return HttpResponse("File uploaded successfuly")
+    else:
+        student = StudentForm()
+        return render(request,"AppSuper/suba.html",{'form':student,'variable_error':True})
+
 #----------LOGIN---------------
 #------INGRESAR-----
 def login_request(request):
@@ -108,7 +123,6 @@ def editarPerfil(request):
             usuario.password1 = informacion['password1']
             usuario.password2 = informacion['password2']
             usuario.save()
-
             return render(request, 'AppSuper/inicio.html',{'mensaje':f"Datos de {username} actualizados"})
     else:
         formulario = UserEditForm(initial={'email':usuario.email})
