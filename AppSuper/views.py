@@ -93,7 +93,7 @@ def register_request(request):
             return render(request, 'AppSuper/inicio.html', {'mensaje':"No se pudeo crear el usuario"})
     else:
         form = UserRegistrationForm()
-        return render(request, 'AppSuper/tienda.html', {'form':form})
+        return render(request, 'AppSuper/register.html', {'form':form})
 
 #----EDITAR USUARIO----
 def editarPerfil(request):
