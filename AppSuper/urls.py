@@ -22,14 +22,6 @@ urlpatterns = [
     #Mensaje:
     path('mensajeFormulario/', views.mensajeFormulario, name="mensajeFormulario"),
     #carga archivo:
-<<<<<<< HEAD
-    #path('suba/', views.simple_upload, name='suba'),
-    
-    #carga archivo2:
-    #path('admin/',admin.site.url),
     path('suba/',views.index),
-=======
-    path('suba/', views.simple_upload, name='suba')
->>>>>>> 9c17715b21e9960e41a58ebee1f8ff9728fbb77f
 ]
 

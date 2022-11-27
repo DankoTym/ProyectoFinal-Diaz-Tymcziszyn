@@ -9,7 +9,6 @@
 
 
 {% block contenidoCambiante %}
-<<<<<<< HEAD
 <!--  https://www.youtube.com/watch?v=4yHDYa8lHVo&ab_channel=Programaci%C3%B3nDeVerdad  
 <div>
     <form method="post" class="form-signin" enctype="multipart/form-data">
@@ -39,10 +38,10 @@
             <p>Archivo cargado correctamente </p>
             <button type="submit" class="save btn btn-primary" href="suba.html"> Cargar otro producto </button>     
             {% elif variable_error == True %}
+            
+            {% else %}
             <p>Error al cargar el archivo </p>
             <button type="submit" class="save btn btn-primary" href="suba.html"> Intentar nuevamente </button>
-            {% else %}
-            
             {% endif %}
         </form>
     </div>
@@ -50,19 +49,5 @@
 
 
 
-=======
-
-<div>
-    <form method="post" class="form-signin" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="myfile">
-        <button type="submit">Subir archivo </button>
-    </form>
-</div>
-
-{% if uploaded_file_url %}
-<p>Archivo subido en: <a href="{{ uploaded_file_url }}"> {{uploaded_file_url}}  </a></p>
-{% endif %}
->>>>>>> 9c17715b21e9960e41a58ebee1f8ff9728fbb77f
 
 {% endblock%}
