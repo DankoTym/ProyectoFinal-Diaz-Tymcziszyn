@@ -13,11 +13,8 @@ from AppSuper.forms import UserRegistrationForm, UserEditForm
 #----IMPORTACIONES MENSAJES:--
 from AppSuper.forms import MensajeFormulario
 #----CARGA DE ARCHIVOS----
-from django.core.files.storage import FileSystemStorage
-from django.conf import settings
-#----CARGA ARCHIVOS2----
 from AppSuper.forms import StudentForm
-from AppSuper.functions import handle_uploaded_file
+#from AppSuper.functions import handle_uploaded_file
 
 
 #----Carrito de Compras:------
