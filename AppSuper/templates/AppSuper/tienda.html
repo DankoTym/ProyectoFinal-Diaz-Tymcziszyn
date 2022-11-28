@@ -31,7 +31,7 @@
                             <div class="col-6">
                                 <div class="card" style="height: 20rem; width: 15rem; margin: 5px 0px;">
                                     <div class="card-body">
-
+                                      <div>
                                         {% if producto.imagen%}   <!-- ESTO ES PARA QUE NO SE ROMPA SI NO HAY IMAGEN CARGADA -->
                                         <img class="card.img" src="{{ producto.imagen.url }}" width="150" height="150">
                                         {% endif %}
@@ -40,6 +40,13 @@
                                         <p class="card-text">{{producto.categoria}}</p>
                                         <p class="card-text">${{producto.precio}}</p>
                                         <a href="{% url 'Add' producto.id %}" class="btn btn-primary">Agregar al carrito</a>
+                                        {% if request.user.is_staff %}
+                                          <a href="{% url 'Producto_detalle' producto.id %}" class="btn btn-primary">Ver</a>
+                                          <a href="{% url 'Producto_editar' producto.id %}" class="btn btn-primary">Editar</a>
+                                          <a href="{% url 'Producto_eliminar' producto.id %}" class="btn btn-primary">Borrar</a>
+                                          <!-- <a href="{% url 'Producto_editar' producto.id %}" class="btn btn-primary">Editar</a> -->
+                                        {% endif %}
+                                        
                                     </div>
                                 </div>
                             </div>

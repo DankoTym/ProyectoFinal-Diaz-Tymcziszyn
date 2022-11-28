@@ -1,0 +1,15 @@
+{% extends "AppSuper/padre.html" %}     <!--Por sintaxis de Dajngo se debe generar este .html si o si con _form.html en el nombre, basicamente valida la edición-->
+{% load static %}
+
+{% block contenidoDeTitulo %}
+<h2>Producto</h2>
+{% endblock%}
+
+{% block contenidoCambiante %}
+
+<form method="POST">{% csrf_token %}
+    Cargar Producto
+    {{form.as_p}}                               <!-- Permite mostrar los campos del elemento -->
+    <input type="submit" value="Enviar"/>
+</form>
+{% endblock %}

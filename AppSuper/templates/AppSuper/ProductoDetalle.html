@@ -1,0 +1,27 @@
+{% extends "AppSuper/padre.html" %}
+{% load static %}
+
+{% block contenidoDeTitulo %}
+<h2>Articulo</h2>
+{% endblock%}
+
+{% block contenidoCambiante %}
+
+
+<div class="col-6">
+    <div class="card" style="height: 20rem; width: 15rem; margin: 5px 0px;">
+        <div class="card-body">
+          <div>
+            {% if producto.imagen%}   <!-- ESTO ES PARA QUE NO SE ROMPA SI NO HAY IMAGEN CARGADA -->
+            <img class="card.img" src="{{ producto.imagen.url }}" width="150" height="150">
+            {% endif %}
+            
+            <h5 class="card-title">{{producto.nombre}}</h5>
+            <p class="card-text">{{producto.categoria}}</p>
+            <p class="card-text">${{producto.precio}}</p>
+            <a href="{% url 'Add' producto.id %}" class="btn btn-primary">Agregar al carrito</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -3,7 +3,7 @@ from AppSuper import views
 from AppSuper.views import tienda, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito 
 from django.contrib.auth.views import LogoutView    #Esto es solo para el logout
 from django.contrib import admin
-from AppSuper.views import ProductoList, ProductoDetail, ProductoCreate, ProductoDelete, ProductoUpdate
+
 
 
 urlpatterns = [
@@ -24,13 +24,12 @@ urlpatterns = [
     path('mensajeFormulario/', views.mensajeFormulario, name="mensajeFormulario"),
     #carga archivo:
     path('suba/',views.index),
-
-
-    path('listaproductos',ProductoList.as_view(), name='ListaProductos'),
-    path('detalleproductos/<pk>',ProductoDetail.as_view(),name='DetalleProductos'),
-    path('creaproductos',ProductoCreate.as_view(),name='CreaProductos'),
-    path('actualizarproductos/<pk>',ProductoUpdate.as_view(), name='ActualizaProductos'),
-    path('eliminarproductos/<pk>',ProductoDelete.as_view(), name='EliminaProductos'),
-
+    
+    path('Producto/lista/', views.ProductoList.as_view(), name="Producto_list"),
+    path('Producto/<pk>', views.ProductoDitail.as_view(), name="Producto_detalle"),        #el <pk> pasa de forma automatica el id por django
+    path('Producto/nuevo/', views.ProductoCrear.as_view(), name="Producto_crear"),
+    path('Producto/edit/<pk>', views.ProductoEdicion.as_view(), name="Producto_editar"),
+    path('Producto/delete/<pk>', views.ProductoEliminacion.as_view(), name="Producto_eliminar"),
+    
 ]
 

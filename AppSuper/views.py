@@ -21,11 +21,10 @@ from AppSuper.forms import StudentForm
 from AppSuper.forms import ListaProductos
 
 #----CRUD PRODUCTOS----
-from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import UpdateView, DeleteView
-from django.views.generic import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 
 
@@ -147,28 +146,32 @@ def mensajeFormulario(request):
 
 
 #----CRUD basado en clases----
+#--------------LISTA_VIEWS----------
 
-class ProductoList(ListView):
-    model=Producto
-    template_name = 'producto_list.html'
+class ProductoList(ListView): 
+    model = Producto
+    template_name = 'AppSuper/Productos_list.html'
 
-class ProductoDetail(DetailView):
-    model=Producto
-    template_name = 'producto_detail.html'
-   
-class ProductoCreate(CreateView):
-    model=Producto
-    template_name = 'producto_create.html'
-    fields = ['nombre','categoria','precio']
-    success_url = '/AppSuper/'
-    
-class ProductoUpdate(UpdateView):
-    model=Producto
-    template_name = 'producto_update.html'
-    fields = ['nombre','categoria','precio']
-    success_url = '/AppSuper/'
+#Detail_Views
+class ProductoDitail(DetailView):
+    model = Producto
+    template_name = 'AppSuper/ProductoDetalle.html'
 
-class ProductoDelete(DeleteView):
-    model=Producto
-    template_name = 'producto_delete.html'
-    success_url = '/AppSuper/'
+#CreateView
+
+class ProductoCrear(CreateView):
+    model = Producto
+    success_url = reverse_lazy('Tienda')
+    fields = ['nombre', 'categoria', 'precio', 'imagen']
+
+#UpdateView
+
+class ProductoEdicion(UpdateView):
+    model = Producto
+    success_url = reverse_lazy('Tienda')
+    fields = ['nombre', 'categoria', 'precio', 'imagen']    
+
+
+class ProductoEliminacion(DeleteView):
+    model = Producto  
+    success_url = reverse_lazy('Tienda')

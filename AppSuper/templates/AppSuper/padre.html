@@ -31,34 +31,12 @@
 
                         <li class="nav-item"><a class="nav-link" href="{% url 'Tienda'%}">Articulos</a></li>
                         <!-- Agregué este form para ver si puedo pasar una variable desde acá a la view-->
-                        <form action=" " method="post">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
-                                                            
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#!">Todos los Productos</a></li>
-                                        <li><hr class="dropdown-divider" /></li>
-                                        <li><a class="dropdown-item" href="{% url 'Tienda' %}">Limpieza</a></li>
-                                        <li><a class="dropdown-item" href="{% url 'Tienda' %}">Panaderia</a></li>
-                                    </ul>
 
-                                
-                            </li>
-                            
-                          
-                                    
-                                
-                            
-                        </form>
                         <form action=" " method="post">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Edición</a>
-                                                                
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li><a class="dropdown-item" href="{% url 'ListaProductos'  %}">Listar productos</a></li>
-                                            
-                                        </ul>
-                            </li>
+                            {% if request.user.is_staff %}      <!-- para que solo los super user puedan ver -->
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'Producto_crear'%}"">Agregar Articulo</a></li>
+                                
+                            {% endif %}
                         </form>
                         
                     </ul>
