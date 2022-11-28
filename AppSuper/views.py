@@ -16,7 +16,7 @@ from AppSuper.forms import MensajeFormulario
 
 #----CARGA ARCHIVOS2----
 from AppSuper.forms import StudentForm
-from AppSuper.functions import handle_uploaded_file
+#from AppSuper.functions import handle_uploaded_file
 
 from AppSuper.forms import ListaProductos
 
