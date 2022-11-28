@@ -3,12 +3,13 @@ from AppSuper import views
 from AppSuper.views import tienda, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito
 from django.contrib.auth.views import LogoutView    #Esto es solo para el logout
 from django.contrib import admin
-
+from AppSuper.views import ProductoList, ProductoDetail, ProductoCreate, ProductoDelete, ProductoUpdate
 
 
 urlpatterns = [
     #path('', views.Inicio, name="inicio"),
     path('', tienda, name="Tienda"),
+    #path('<producto>', tienda, name="Tienda"),
     #ACIONES DEL CARRITO:
     path('agregar/<int:producto_id>/', agregar_producto, name="Add"),
     path('eliminar/<int:producto_id>/', eliminar_producto, name="Del"),
@@ -23,5 +24,13 @@ urlpatterns = [
     path('mensajeFormulario/', views.mensajeFormulario, name="mensajeFormulario"),
     #carga archivo:
     path('suba/',views.index),
+
+
+    path('listaproductos',ProductoList.as_view(), name='ListaProductos'),
+    path('detalleproductos/<pk>',ProductoDetail.as_view(),name='DetalleProductos'),
+    path('creaproductos',ProductoCreate.as_view(),name='CreaProductos'),
+    path('actualizarproductos/<pk>',ProductoUpdate.as_view(), name='ActualizaProductos'),
+    path('eliminarproductos/<pk>',ProductoDelete.as_view(), name='EliminaProductos'),
+
 ]
 

@@ -1,0 +1,105 @@
+
+{% extends "AppSuper/padre.html" %}
+{% load static %}
+
+
+{% block contenidoCambiante %}
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+
+    
+    <!-- Bootstrap -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Styles -->
+    <link href="{% static 'css/estilos.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 align-self-center"><h1 class="display-5">Productos:</h1></div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="row" style="padding: 10px 0;">
+                    <div class="col-12">
+                        <div class="row">
+                            
+                           <form action="{% url 'CreaProductos' %}" method="POST"> {% csrf_token %}
+                                
+                                {{form.as_p}}
+
+                                <input type="submit" value="Crear"/>
+
+
+                           </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+
+
+    <!-- Bootstrap -->
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+<br>
+  <!-- CARRITO DE COMPRA -->
+<body>
+    <div class="container">
+        <div class="alert alert-primary" role="alert">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="row" colspan="3" class="text-center">Su carrito contiene:</th>
+                </tr>
+                <tr>
+                  <th scope="col">Articulo</th>
+                  <th scope="col">Unidades</th>
+                  <th scope="col">Cantidad</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% if request.session.carrito.items %}
+              {% for key, value in request.session.carrito.items %}
+                <tr>
+                  <td>{{value.nombre}}</td>
+                  <td>{{value.cantidad}}</td>
+                  <td>${{value.acumulado}}
+                    <a href="{% url 'Add' value.producto_id %}" class="badge btn btn-dark badge-dark">+</a>
+                    <a href="{% url 'Sub' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
+                  </td>
+                </tr>
+              {% endfor %}
+              {% else %}
+              <tr>
+                  <td colspan="3">
+                      <div class="alert alert-danger text-center"> Sin Productos </div>
+                  </td>
+              </tr>
+              {% endif %}
+                <tr>
+                  <th scope="row">Precio Total:</th>
+                  <td colspan="2">$ {{total_carrito}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <hr>
+        </div>
+        <div class="row text-center">
+            <div class="col-6"><a href="{% url 'CLS' %}" class="btn btn-danger">Limpiar</a></div>
+            <!-- <div class="col-6"><a href="#" class="btn btn-success">Guardar</a></div> -->  <!-- Estaria bueno mandar todo el carrito como contexto -->
+        </div>
+    </div> 
+</body>
+  <!-- FIN CARRITO -->
+</html>
+
+{% endblock%}

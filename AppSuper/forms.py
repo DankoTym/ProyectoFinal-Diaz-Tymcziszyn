@@ -38,3 +38,10 @@ class StudentForm(forms.Form):
     email = forms.EmailField(label="Correo")
     time = forms.DateField(label="Fecha subida")
     file = forms.FileField(label="Archivo")
+
+#----Para ordenamiento de vista de la tienda----
+
+class ListaProductos(forms.Form):
+    product = forms.CharField(label="Producto", max_length=50)
+
+

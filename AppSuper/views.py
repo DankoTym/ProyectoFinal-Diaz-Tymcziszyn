@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import redirect   #redirige los datos a la pagina establecida (menos lineas de codigo)
 from AppSuper.models import Producto, Mensaje   #importo mis models
-
+ 
 #----IMPORTACIONES CARRITO Y TIENDA:---
 from AppSuper.Carrito import Carrito
 #----IMPORTACIONES LOGIN:----
@@ -12,12 +13,20 @@ from django.contrib.auth import login, authenticate, logout
 from AppSuper.forms import UserRegistrationForm, UserEditForm
 #----IMPORTACIONES MENSAJES:--
 from AppSuper.forms import MensajeFormulario
-#----CARGA DE ARCHIVOS----
-from django.core.files.storage import FileSystemStorage
-from django.conf import settings
+
 #----CARGA ARCHIVOS2----
 from AppSuper.forms import StudentForm
 from AppSuper.functions import handle_uploaded_file
+
+from AppSuper.forms import ListaProductos
+
+#----CRUD PRODUCTOS----
+from django.urls import reverse_lazy
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+
 
 
 #----Carrito de Compras:------
@@ -48,7 +57,7 @@ def limpiar_carrito(request):
     carrito.limpiar()
     return redirect("Tienda")
 
-#-------CARGA ARCHIVOS 2---------
+#-------CARGA ARCHIVOS---------
 def index(request):
     if request.method=="POST":
         student = StudentForm(request.POST, request.FILES)
@@ -131,3 +140,32 @@ def mensajeFormulario(request):
         miFormulario = MensajeFormulario()
     
     return render(request, 'AppSuper/mensajeFormulario.html', {'miFormulario':miFormulario})
+
+
+
+#----CRUD basado en clases----
+
+class ProductoList(ListView):
+    model=Producto
+    template_name = 'producto_list.html'
+
+class ProductoDetail(DetailView):
+    model=Producto
+    template_name = 'producto_detail.html'
+   
+class ProductoCreate(CreateView):
+    model=Producto
+    template_name = 'producto_create.html'
+    fields = ['nombre','categoria','precio']
+    success_url = '/AppSuper/'
+    
+class ProductoUpdate(UpdateView):
+    model=Producto
+    template_name = 'producto_update.html'
+    fields = ['nombre','categoria','precio']
+    success_url = '/AppSuper/'
+
+class ProductoDelete(DeleteView):
+    model=Producto
+    template_name = 'producto_delete.html'
+    success_url = '/AppSuper/'
