@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import redirect   #redirige los datos a la pagina establecida (menos lineas de codigo)
-from AppSuper.models import Producto, Mensaje   #importo mis models
+from AppSuper.models import Producto, Mensaje  #importo mis models
  
 #----IMPORTACIONES CARRITO Y TIENDA:---
 from AppSuper.Carrito import Carrito
@@ -12,7 +12,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from AppSuper.forms import UserRegistrationForm, UserEditForm
 #----IMPORTACIONES MENSAJES:--
-from AppSuper.forms import MensajeFormulario
+from AppSuper.forms import MensajeFormulario 
 
 #----CARGA ARCHIVOS2----
 from AppSuper.forms import StudentForm
@@ -24,7 +24,8 @@ from AppSuper.forms import ListaProductos
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import UpdateView, DeleteView
+from django.views.generic import CreateView
 
 
 
@@ -106,6 +107,8 @@ def register_request(request):
     else:
         form = UserRegistrationForm()
         return render(request, 'AppSuper/register.html', {'form':form})
+
+
 
 #----EDITAR USUARIO----
 def editarPerfil(request):

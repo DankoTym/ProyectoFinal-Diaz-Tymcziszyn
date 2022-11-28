@@ -1,6 +1,6 @@
 from django.urls import path
 from AppSuper import views
-from AppSuper.views import tienda, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito
+from AppSuper.views import tienda, agregar_producto, eliminar_producto, restar_producto, limpiar_carrito 
 from django.contrib.auth.views import LogoutView    #Esto es solo para el logout
 from django.contrib import admin
 from AppSuper.views import ProductoList, ProductoDetail, ProductoCreate, ProductoDelete, ProductoUpdate
