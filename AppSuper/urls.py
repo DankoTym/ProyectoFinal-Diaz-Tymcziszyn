@@ -30,6 +30,6 @@ urlpatterns = [
     path('Producto/edit/<pk>', views.ProductoEdicion.as_view(), name="Producto_editar"),
     path('Producto/delete/<pk>', views.ProductoEliminacion.as_view(), name="Producto_eliminar"),
 
-    path('aboud/', views.aboud, name="aboud"),
+    path('about/', views.about, name="about"),
 ]
 

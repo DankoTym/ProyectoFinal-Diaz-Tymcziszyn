@@ -177,6 +177,6 @@ class ProductoEliminacion(DeleteView):
     success_url = reverse_lazy('Tienda')
 
 
-def aboud(request):
+def about(request):
     
-    return render(request, "AppSuper/aboud.html")
+    return render(request, "AppSuper/about.html")
