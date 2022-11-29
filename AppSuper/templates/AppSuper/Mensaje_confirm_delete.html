@@ -1,0 +1,17 @@
+{% extends "AppSuper/padre.html" %}     <!--Por sintaxis de Dajngo se debe generar este .html si o si con _confirm_delete.html en el nombre-->
+{% load static %}
+
+{% block contenidoDeTitulo %}
+<h2>Eliminar Mensaje</h2>
+{% endblock%}
+
+{% block contenidoCambiante %}
+
+<center>
+    <form method="POST">{% csrf_token %}
+        Estás seguro de eliminar el mensaje"{{object}}"
+        <input type="submit" value="SI"/><button><a href="{% url 'Mensaje_list' %}">NO</a></button>
+    </form>
+</center>
+
+{% endblock %}

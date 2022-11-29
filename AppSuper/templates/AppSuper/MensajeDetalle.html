@@ -1,0 +1,16 @@
+{% extends "AppSuper/padre.html" %}
+{% load static %}
+
+{% block contenidoDeTitulo %}
+<h2>Mensaje</h2>
+{% endblock%}
+
+{% block contenidoCambiante %}
+
+<center>
+    <p>NOMBRE: {{mensaje.nombre}}</p>
+    <p>Texto: {{mensaje.texto}}</p>
+</center>
+
+
+{% endblock %}

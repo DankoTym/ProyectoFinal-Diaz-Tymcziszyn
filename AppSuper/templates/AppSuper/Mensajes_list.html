@@ -1,0 +1,25 @@
+{% extends "AppSuper/padre.html" %}
+{% load static %}
+
+{% block contenidoDeTitulo %}
+
+{% endblock%}
+
+{% block contenidoCambiante %}
+
+<h3>Buzón de Mensajes</h3>
+
+{% for mensaje in object_list %}
+    <center>
+        <li>{{mensaje}}</li>
+    <button>
+        <a href="{% url 'Mensaje_detalle' mensaje.id %}">Leer</a>     <!-- Acá usamos el ID de dajngo -->
+    </button>
+    <button>
+        <a href="{% url 'Mensaje_eliminar' mensaje.id %}">Borrar</a>
+    </button>
+    </center>
+    
+{% endfor %}
+
+{% endblock %}

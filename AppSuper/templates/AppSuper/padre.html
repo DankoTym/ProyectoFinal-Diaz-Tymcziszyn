@@ -7,8 +7,6 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>ElViejoAlmacen</title>
-        {% block titulo %}
-        {% endblock%} 
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -25,19 +23,24 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         
-                        {% if user.is_authenticated %}  <!-- Esto es para que solo los logueados ingresen acá-->
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'mensajeFormulario'%}"">Mensaje</a></li>
-                            
-                            
-                        {% else %}                      <!-- En caso de no estar logueado, ingresa acá -->
-                            
-                        {% endif %}
+                        
 
 
                         <form action=" " method="post">
                             {% if request.user.is_staff %}      <!-- para que solo los super user puedan ver -->
-                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'Producto_crear'%}"">Agregar Articulo</a></li>
-                                
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'Producto_crear'%}"">Agregar</a></li>
+                            {% else %}
+                                {% if user.is_authenticated %}  <!-- Esto es para que solo los logueados ingresen acá-->
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'mensajeFormulario'%}"">Mensaje</a></li>
+                                {% endif %} 
+                            {% endif %}
+                        </form>
+
+                        <form action=" " method="post">
+                            {% if request.user.is_staff %}      <!-- para que solo los super user puedan ver -->
+                            
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'Mensaje_list'%}"">Buzón</a></li>
+                                                           
                             {% endif %}
                         </form>
                         
@@ -47,12 +50,13 @@
                         {% if user.is_authenticated %}  <!-- Esto es para que solo los logueados ingresen acá-->
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'editarPerfil'%}">{{user.username}}</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'logout'%}">Salir</a></li>
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'about'%}"">About</a></li>
+                            
                         {% else %}                      <!-- En caso de no estar logueado, ingresa acá -->
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login'%}"">Iniciar</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'registro'%}"">Registrarse</a></li>
                             
                         {% endif %}
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'about'%}"">About</a></li>
 
                        
                     </li>

@@ -39,7 +39,9 @@
                                         <h5 class="card-title">{{producto.nombre}}</h5>
                                         <p class="card-text">{{producto.categoria}}</p>
                                         <p class="card-text">${{producto.precio}}</p>
+                                        {% if user.is_authenticated %}
                                         <a href="{% url 'Add' producto.id %}" class="btn btn-primary">Agregar al carrito</a>
+                                        {% endif %}
                                         {% if request.user.is_staff %}
                                         <a href="{% url 'Producto_detalle' producto.id %}" class="btn btn-primary">Ver</a>
                                         {% endif %}

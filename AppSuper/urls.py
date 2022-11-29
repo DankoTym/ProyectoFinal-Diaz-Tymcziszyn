@@ -31,5 +31,9 @@ urlpatterns = [
     path('Producto/delete/<pk>', views.ProductoEliminacion.as_view(), name="Producto_eliminar"),
 
     path('about/', views.about, name="about"),
+
+    path('Mensaje/lista/', views.MensajeList.as_view(), name="Mensaje_list"),
+    path('Mensaje/<pk>', views.MensajeDitail.as_view(), name="Mensaje_detalle"),
+    path('Mensaje/delete/<pk>', views.MensajeEliminacion.as_view(), name="Mensaje_eliminar"),
 ]
 

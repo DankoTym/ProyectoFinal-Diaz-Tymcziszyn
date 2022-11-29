@@ -107,8 +107,6 @@ def register_request(request):
         form = UserRegistrationForm()
         return render(request, 'AppSuper/register.html', {'form':form})
 
-
-
 #----EDITAR USUARIO----
 def editarPerfil(request):
     usuario = request.user #aca django manda directamente el modelo, no lo generamos nos
@@ -137,14 +135,23 @@ def mensajeFormulario(request):
         texto = informacion['texto']
         mensaje = Mensaje(nombre=nombre, texto=texto)
         mensaje.save()
-        return redirect("Tienda")
+        return render(request, 'AppSuper/inicio.html', {'mensaje':f'Mensaje Enviado'}) 
     else:
         miFormulario = MensajeFormulario()
     
     return render(request, 'AppSuper/mensajeFormulario.html', {'miFormulario':miFormulario})
 
+class MensajeList(ListView): 
+    model = Mensaje
+    template_name = 'AppSuper/Mensajes_list.html'
 
+class MensajeDitail(DetailView):
+    model = Mensaje
+    template_name = 'AppSuper/MensajeDetalle.html'
 
+class MensajeEliminacion(DeleteView):
+    model = Mensaje  
+    success_url = reverse_lazy('Mensaje_list')
 #----CRUD basado en clases----
 #--------------LISTA_VIEWS----------
 
