@@ -6,10 +6,12 @@
 {% endblock%}
 
 {% block contenidoCambiante %}
+<center>
+    <form method="POST">{% csrf_token %}
+        Cargar Producto
+        {{form.as_p}}                               <!-- Permite mostrar los campos del elemento -->
+        <input type="submit" value="Enviar"/>
+    </form>
+</center>
 
-<form method="POST">{% csrf_token %}
-    Cargar Producto
-    {{form.as_p}}                               <!-- Permite mostrar los campos del elemento -->
-    <input type="submit" value="Enviar"/>
-</form>
 {% endblock %}

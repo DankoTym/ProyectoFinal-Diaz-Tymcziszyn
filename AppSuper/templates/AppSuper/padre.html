@@ -25,6 +25,8 @@
                         
                         {% if user.is_authenticated %}  <!-- Esto es para que solo los logueados ingresen acá-->
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'mensajeFormulario'%}"">Mensaje</a></li>
+                            
+                            
                         {% else %}                      <!-- En caso de no estar logueado, ingresa acá -->
                             
                         {% endif %}
@@ -45,6 +47,7 @@
                         {% if user.is_authenticated %}  <!-- Esto es para que solo los logueados ingresen acá-->
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'editarPerfil'%}">{{user.username}}</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'logout'%}">Salir</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'aboud'%}"">Aboud</a></li>
                         {% else %}                      <!-- En caso de no estar logueado, ingresa acá -->
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login'%}"">Iniciar</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'registro'%}"">Registrarse</a></li>
@@ -77,7 +80,7 @@
        
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Díaz / Tymcziszyn &copy; Nuestra Website 2022</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

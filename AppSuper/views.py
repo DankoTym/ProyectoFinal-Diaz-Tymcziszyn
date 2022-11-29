@@ -175,3 +175,8 @@ class ProductoEdicion(UpdateView):
 class ProductoEliminacion(DeleteView):
     model = Producto  
     success_url = reverse_lazy('Tienda')
+
+
+def aboud(request):
+    
+    return render(request, "AppSuper/aboud.html")

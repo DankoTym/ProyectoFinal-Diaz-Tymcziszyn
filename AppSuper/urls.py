@@ -9,7 +9,6 @@ from django.contrib import admin
 urlpatterns = [
     #path('', views.Inicio, name="inicio"),
     path('', tienda, name="Tienda"),
-    #path('<producto>', tienda, name="Tienda"),
     #ACIONES DEL CARRITO:
     path('agregar/<int:producto_id>/', agregar_producto, name="Add"),
     path('eliminar/<int:producto_id>/', eliminar_producto, name="Del"),
@@ -30,6 +29,7 @@ urlpatterns = [
     path('Producto/nuevo/', views.ProductoCrear.as_view(), name="Producto_crear"),
     path('Producto/edit/<pk>', views.ProductoEdicion.as_view(), name="Producto_editar"),
     path('Producto/delete/<pk>', views.ProductoEliminacion.as_view(), name="Producto_eliminar"),
-    
+
+    path('aboud/', views.aboud, name="aboud"),
 ]
 

@@ -7,9 +7,11 @@
 
 {% block contenidoCambiante %}
 
+<center>
+    <form method="POST">{% csrf_token %}
+        Estás seguro de eliminar el producto"{{object}}"
+        <input type="submit" value="SI"/><button><a href="{% url 'Tienda' %}">NO</a></button>
+    </form>
+</center>
 
-<form method="POST">{% csrf_token %}
-    Estás seguro de eliminar al studiante "{{object}}"
-    <input type="submit" value="SI"/><button><a href="{% url 'Tienda' %}">NO</a></button>
-</form>
 {% endblock %}

@@ -6,8 +6,8 @@
 {% endblock%}
 
 {% block contenidoCambiante %}
-
-<h3>{{usuario}}, ¿deseas editar tu perfil?</h3>
+<center>
+    <h3>{{usuario}}, ¿deseas editar tu perfil?</h3>
 
     <form action="{% url 'editarPerfil' %}" method="POST">{% csrf_token %}
     <table>
@@ -15,5 +15,7 @@
     </table>
     <input type="submit" value="Guardar">
     </form>
+</center>
+
 
 {% endblock %}

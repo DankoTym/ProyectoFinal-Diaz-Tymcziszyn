@@ -7,16 +7,18 @@
 
 {% block contenidoCambiante %}
 
+<center>
+    <div class="card">
+        <div Class="card-header">
+            <strong class="card-title">Ingrese sus datos:</strong>
+        </div>
+        <div class="table-stats order-table ov-h">
+            <form method="POST">{% csrf_token %}
+                {{ form.as_p }}                               <!-- Permite mostrar los campos del elemento -->
+                <button type="submit">Registrarse</button>
+            </form>
+        </div>
+    </div>
+</center>
 
-<div class="card">
-    <div Class="card-header">
-        <strong class="card-title">Ingrese sus datos:</strong>
-    </div>
-    <div class="table-stats order-table ov-h">
-        <form method="POST">{% csrf_token %}
-            {{ form.as_p }}                               <!-- Permite mostrar los campos del elemento -->
-            <button type="submit">Registrarse</button>
-        </form>
-    </div>
-</div>
 {% endblock %}

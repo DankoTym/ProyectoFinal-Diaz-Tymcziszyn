@@ -17,7 +17,8 @@
     <!-- Styles -->
     <link href="{% static 'css/estilos.css' %}" rel="stylesheet">
 </head>
-<body>
+<center>
+  <body>
     <div class="container">
         <div class="row">
             <div class="col-12 align-self-center"><h1 class="display-5">Productos:</h1></div>
@@ -31,7 +32,6 @@
                             <div class="col-6">
                                 <div class="card" style="height: 20rem; width: 15rem; margin: 5px 0px;">
                                     <div class="card-body">
-                                      <div>
                                         {% if producto.imagen%}   <!-- ESTO ES PARA QUE NO SE ROMPA SI NO HAY IMAGEN CARGADA -->
                                         <img class="card.img" src="{{ producto.imagen.url }}" width="150" height="150">
                                         {% endif %}
@@ -41,12 +41,8 @@
                                         <p class="card-text">${{producto.precio}}</p>
                                         <a href="{% url 'Add' producto.id %}" class="btn btn-primary">Agregar al carrito</a>
                                         {% if request.user.is_staff %}
-                                          <a href="{% url 'Producto_detalle' producto.id %}" class="btn btn-primary">Ver</a>
-                                          <a href="{% url 'Producto_editar' producto.id %}" class="btn btn-primary">Editar</a>
-                                          <a href="{% url 'Producto_eliminar' producto.id %}" class="btn btn-primary">Borrar</a>
-                                          <!-- <a href="{% url 'Producto_editar' producto.id %}" class="btn btn-primary">Editar</a> -->
+                                        <a href="{% url 'Producto_detalle' producto.id %}" class="btn btn-primary">Ver</a>
                                         {% endif %}
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -64,56 +60,57 @@
     <!-- Bootstrap -->
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
-<br>
-  <!-- CARRITO DE COMPRA -->
-<body>
-    <div class="container">
-        <div class="alert alert-primary" role="alert">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="row" colspan="3" class="text-center">Su carrito contiene:</th>
-                </tr>
-                <tr>
-                  <th scope="col">Articulo</th>
-                  <th scope="col">Unidades</th>
-                  <th scope="col">Cantidad</th>
-                </tr>
-              </thead>
-              <tbody>
-              {% if request.session.carrito.items %}
-              {% for key, value in request.session.carrito.items %}
-                <tr>
-                  <td>{{value.nombre}}</td>
-                  <td>{{value.cantidad}}</td>
-                  <td>${{value.acumulado}}
-                    <a href="{% url 'Add' value.producto_id %}" class="badge btn btn-dark badge-dark">+</a>
-                    <a href="{% url 'Sub' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
-                  </td>
-                </tr>
-              {% endfor %}
-              {% else %}
-              <tr>
-                  <td colspan="3">
-                      <div class="alert alert-danger text-center"> Sin Productos </div>
-                  </td>
-              </tr>
-              {% endif %}
-                <tr>
-                  <th scope="row">Precio Total:</th>
-                  <td colspan="2">$ {{total_carrito}}</td>
-                </tr>
-              </tbody>
-            </table>
-            <hr>
-        </div>
-        <div class="row text-center">
-            <div class="col-6"><a href="{% url 'CLS' %}" class="btn btn-danger">Limpiar</a></div>
-            <!-- <div class="col-6"><a href="#" class="btn btn-success">Guardar</a></div> -->  <!-- Estaria bueno mandar todo el carrito como contexto -->
-        </div>
-    </div> 
-</body>
-  <!-- FIN CARRITO -->
+</center>
+
+<!-- CARRITO DE COMPRA -->
+{% if user.is_authenticated %}
+  <div class="alert alert-primary" role="alert">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="row" colspan="3" class="text-center">CARRITO</th>
+      </tr>
+      <tr>
+        <th scope="col">NOMBRE</th>
+        <th scope="col">PRECIO</th>
+        <th scope="col">CANTIDAD</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% if request.session.carrito.items %}
+    {% for key, value in request.session.carrito.items %}
+      <tr>
+        <td>{{value.nombre}}</td>
+        <td>{{value.precio}}</td>
+        <td>{{value.acumulado}}
+          <a href="{% url 'Add' value.producto_id %}" class="badge btn btn-dark badge-dark">+</a>
+          <a href="{% url 'Sub' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
+        </td>
+      </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+        <td colspan="3">
+            <div class="alert alert-danger text-center"> Sin Productos </div>
+        </td>
+    </tr>
+    
+    {% endif %}
+    <tr>
+      <th scope="row">Total:</th>
+      <td colspan="2">$ {{total_carrito}}</td>
+    </tr>
+
+      
+    </tbody>
+  </table>
+  <hr>
+  </div>
+  <div class="row text-center">
+      <div class="col-6"><a href="{% url 'CLS' %}" class="btn btn-danger">Limpiar</a></div>
+  </div>
+<!-- FIN CARRITO -->
+{% endif %}
 </html>
 
 {% endblock%}
