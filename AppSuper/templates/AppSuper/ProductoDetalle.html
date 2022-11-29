@@ -7,23 +7,26 @@
 
 {% block contenidoCambiante %}
 
+<center>
+    <div class="col-6">
+        <div class="card" style="height: 35rem; width: 35rem; margin: 5px 0px;">
+            <div class="card-body">
+              <div>
+                {% if producto.imagen%}   <!-- ESTO ES PARA QUE NO SE ROMPA SI NO HAY IMAGEN CARGADA -->
+                <img class="card.img" src="{{ producto.imagen.url }}" width="350" height="350">
 
-<div class="col-6">
-    <div class="card" style="height: 20rem; width: 15rem; margin: 5px 0px;">
-        <div class="card-body">
-          <div>
-            {% if producto.imagen%}   <!-- ESTO ES PARA QUE NO SE ROMPA SI NO HAY IMAGEN CARGADA -->
-            <img class="card.img" src="{{ producto.imagen.url }}" width="150" height="150">
-            {% endif %}
-            
-            <h5 class="card-title">{{producto.nombre}}</h5>
-            <p class="card-text">{{producto.categoria}}</p>
-            <p class="card-text">${{producto.precio}}</p>
-            <a href="{% url 'Producto_editar' producto.id %}" class="btn btn-primary">Editar</a>
-            <a href="{% url 'Producto_eliminar' producto.id %}" class="btn btn-primary">Borrar</a>
-            <!-- <a href="{% url 'Producto_editar' producto.id %}" class="btn btn-primary">Editar</a> -->
+                {% endif %}
+                
+                <h5 class="card-title">{{producto.nombre}}</h5>
+                <p class="card-text">{{producto.categoria}}</p>
+                <p class="card-text">${{producto.precio}}</p>
+                <a href="{% url 'Producto_editar' producto.id %}" class="btn btn-primary">Editar</a>
+                <a href="{% url 'Producto_eliminar' producto.id %}" class="btn btn-primary">Borrar</a>
+                
+            </div>
         </div>
     </div>
-</div>
+</center>
+
 
 {% endblock %}

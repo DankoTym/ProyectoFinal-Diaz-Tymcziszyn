@@ -7,6 +7,8 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>ElViejoAlmacen</title>
+        {% block titulo %}
+        {% endblock%} 
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -40,12 +42,12 @@
                         </form>
                         
                     </ul>
-                    <li 
-                        <!-- Esta es la parte derecha del NAV -->
+                    <li>
+                        
                         {% if user.is_authenticated %}  <!-- Esto es para que solo los logueados ingresen acá-->
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'editarPerfil'%}">{{user.username}}</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'logout'%}">Salir</a></li>
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'about'%}"">Aboud</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'about'%}"">About</a></li>
                         {% else %}                      <!-- En caso de no estar logueado, ingresa acá -->
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'login'%}"">Iniciar</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'registro'%}"">Registrarse</a></li>
